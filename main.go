@@ -90,18 +90,26 @@ func main() {
 		log.Printf("Backend check reply: %v", pong)
 	}
 
+	// proxy
 	if cfg.Proxy.Enabled {
 		go startProxy()
 	}
+
+	// api server
 	if cfg.Api.Enabled {
 		go startApi()
 	}
+
+	// 块阻止器？？？
 	if cfg.BlockUnlocker.Enabled {
 		go startBlockUnlocker()
 	}
+
+	// 支付服务
 	if cfg.Payouts.Enabled {
 		go startPayoutsProcessor()
 	}
+
 	quit := make(chan bool)
 	<-quit
 }

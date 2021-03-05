@@ -102,8 +102,8 @@ func (s *ApiServer) Start() {
 
 func (s *ApiServer) listen() {
 	r := mux.NewRouter()
-	r.HandleFunc("/api/stats", s.StatsIndex)
-	r.HandleFunc("/api/miners", s.MinersIndex)
+	r.HandleFunc("/api/stats", s.StatsIndex)   // HGETALL nodes
+	r.HandleFunc("/api/miners", s.MinersIndex) // s.stats 存有miners信息
 	r.HandleFunc("/api/blocks", s.BlocksIndex)
 	r.HandleFunc("/api/payments", s.PaymentsIndex)
 	r.HandleFunc("/api/accounts/{login}", s.AccountIndex)
